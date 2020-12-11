@@ -65,7 +65,7 @@ class Lexer(object):
                 self.next_char()
                 return SyntaxToken(RPAREN, ')')
 
-            print("Syntax Error: ", self.current_char)
+            print("Invalid: ", self.current_char)
             sys.exit(1)
 
         return SyntaxToken(EOF, None)
@@ -240,7 +240,8 @@ def process_user_input(inputs):
 
     for i in inputs:
         if len(i) >= 2:
-            variables[i[0].strip()] = evaluate_expression(i[1].strip())
+            if i[0]:
+                variables[i[0].strip()] = evaluate_expression(i[1].strip())
         else:
             print("Invalid expression: " + i[0])
             sys.exit(0);
@@ -253,5 +254,4 @@ def process_user_input(inputs):
 
 user_input = input("Please enter input: ")
 user_input_data = user_input.split(';')
-user_input_data.remove("")
 process_user_input(user_input_data);
