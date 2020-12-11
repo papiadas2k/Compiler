@@ -70,7 +70,6 @@ class Lexer(object):
 
         return SyntaxToken(EOF, None)
 
-
 class SyntaxToken(object):
     def __init__(self, type, value):
         self.type = type
@@ -178,12 +177,12 @@ def divide_exp(exp):
     vars = re.findall('[_a-z]\w*', exp)
 
     if re.match('[0][0-9]', exp.strip()) is not None:
-        print("Invalid:" + exp)
+        print("Invalid")
         sys.exit(0)
 
     for i in range(len(vars)):
         if vars[i] not in variables:
-            print("Invalid:" + vars[i])
+            print("Invalid" )
             sys.exit(0)
         values[vars[i]] = variables[vars[i]]
 
@@ -216,7 +215,7 @@ def get_minus_plus(lis):
 
 def evaluate_expression(line):
     global variables
-    exp = divide_exp(line)
+    exp = divide_exp(line.strip())
     exp = exp.replace(';', '')
     plus_minus = re.findall(r'(((\++)|(-+))+)', exp)
 
@@ -241,7 +240,7 @@ def process_user_input(inputs):
 
     for i in inputs:
         if len(i) >= 2:
-            variables[i[0]] = evaluate_expression(i[1])
+            variables[i[0].strip()] = evaluate_expression(i[1].strip())
         else:
             print("Invalid expression: " + i[0])
             sys.exit(0);
