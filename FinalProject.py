@@ -68,7 +68,8 @@ class Lexer(object):
             print("Invalid: ", self.current_char)
             sys.exit(1)
 
-        return SyntaxToken(EOF, None)
+        return SyntaxToken(EOF
+                           , None)
 
 class SyntaxToken(object):
     def __init__(self, type, value):
@@ -241,7 +242,7 @@ def process_user_input(inputs):
     for i in inputs:
         if i[0]:
             if len(i) >= 2:
-                variables[i[0].strip()] = evaluate_expression(i[1].strip())
+                variables[i[0].strip()] = evaluate_expression(i[1].strip().replace(" ", ""))
             else:
                 print("Invalid expression: " + i[0])
                 sys.exit(0);
