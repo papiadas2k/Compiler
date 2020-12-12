@@ -239,19 +239,19 @@ def process_user_input(inputs):
        inputs[i] = inputs[i].strip().split("=");
 
     for i in inputs:
-        if len(i) >= 2:
-            if i[0]:
+        if i[0]:
+            if len(i) >= 2:
                 variables[i[0].strip()] = evaluate_expression(i[1].strip())
-        else:
-            print("Invalid expression: " + i[0])
-            sys.exit(0);
+            else:
+                print("Invalid expression: " + i[0])
+                sys.exit(0);
 
 
     print("User Input: {}".format(user_input))
-    print("Output: {}".format(user_input))
+    print("Output below:")
     for i in sorted(variables):
         print("{}  = {}".format(i, variables[i]))
 
-user_input = input("Please enter input: ")
+user_input = input("Please enter input (eg: x= 1; y=3;z = x*y): ")
 user_input_data = user_input.split(';')
 process_user_input(user_input_data);
